@@ -151,6 +151,7 @@
 
 	<div class="betStrings">
 		<p id="default">&nbsp;</p>
+    <p id="tooltip">+$0.00</p>
 		<p id="credits">&nbsp;</p>
 	</div>
 

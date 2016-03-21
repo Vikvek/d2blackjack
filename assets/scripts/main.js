@@ -26,12 +26,13 @@ toggle between hiding and showing the dropdown content */
 function showBetAmount() {
     document.getElementById("betDropUp").classList.toggle("show");
 
-    // Changes the position of 'credits' and 'default bet' if user opens bet menu.
+    // Changes the position of 'credits' and 'default bet' if user opens bet menu. Also displays tooltip
     if ( $.browser.mozilla ) {
       $("#default").css({"bottom": "none", "top": "-0.3em"});
       $("#credits").css({"bottom": "none", "top": "-0.3em"});
     } else {
       $("#default").css({"bottom": "0em"});
+      $("#tooltip").css({"display": "inherit"});
       $("#credits").css({"bottom": "0em"});
     }
 }
@@ -57,8 +58,9 @@ window.onclick = function(event) {
       $("#default").css({"bottom": "none", "top": "1.6em"});
       $("#credits").css({"bottom": "none", "top": "1.6em"});
     } else {
-      $("#default").css({"bottom": "-2em"});
-      $("#credits").css({"bottom": "-2em"});
+      $("#default").css({"bottom": "-1.9em"});
+      $("#tooltip").css({"display": "none"});
+      $("#credits").css({"bottom": "-1.9em"});
     }
   }
 }
@@ -348,7 +350,7 @@ var player = new Array(maxSplits + 1);
 var curPlayerHand, numPlayerHands;
 
 var credits, defaultBet;
-var creditsTextNode, defaultTextNode;
+var creditsTextNode, defaultTextNode, tooltipTextNode;
 
 var dealRoundCounter;
 
@@ -365,6 +367,53 @@ function initGame() {
 
   creditsTextNode = document.getElementById("credits").firstChild;
   defaultTextNode = document.getElementById("default").firstChild;
+
+  // Locate 'tooltip' so we can modify value
+  tooltipTextNode = document.getElementById("tooltip").firstChild;
+
+  //Tooltip for White Chip 1.00
+  $("#increaseWhite").hover(function(){
+    tooltipTextNode.nodeValue = "+$1.00"
+  }, function(){
+    tooltipTextNode.nodeValue = "+$0.00"
+  });
+  //Tooltip for Pink Chip 2.50
+  $("#increasePink").hover(function(){
+    tooltipTextNode.nodeValue = "+$2.50"
+  }, function(){
+    tooltipTextNode.nodeValue = "+$0.00"
+  });
+  //Tooltip for Red Chip 5.00
+  $("#increaseRed").hover(function(){
+    tooltipTextNode.nodeValue = "+$5.00"
+  }, function(){
+    tooltipTextNode.nodeValue = "+$0.00"
+  });
+  //Tooltip for Green Chip 10.00
+  $("#increaseGreen").hover(function(){
+    tooltipTextNode.nodeValue = "+$10.00"
+  }, function(){
+    tooltipTextNode.nodeValue = "+$0.00"
+  });
+  //Tooltip for Blue Chip 25.00
+  $("#increaseBlue").hover(function(){
+    tooltipTextNode.nodeValue = "+$25.00"
+  }, function(){
+    tooltipTextNode.nodeValue = "+$0.00"
+  });
+  //Tooltip for Black Chip 50.00
+  $("#increaseBlack").hover(function(){
+    tooltipTextNode.nodeValue = "+$50.00"
+  }, function(){
+    tooltipTextNode.nodeValue = "+$0.00"
+  });
+  //Tooltip for Orange Chip 100.00
+  $("#increaseOrange").hover(function(){
+    tooltipTextNode.nodeValue = "+$100.00"
+  }, function(){
+    tooltipTextNode.nodeValue = "+$0.00"
+  });
+
 
   // Initialize player's credits and bet amount.
 

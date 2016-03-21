@@ -447,19 +447,30 @@ Bet Menu
 }
 
 #default, #credits {
-	background-color:#8e2b25;
+	background-color: #6B2027;
 	padding: 0 0.45em;
 	border-style: solid;
 	border-color: #8e2b25;
 	border-width: 2px;
 	position: relative;
-	bottom: -2em;
+	bottom: -1.9em;
 }
 
 /* Set 'defaultbet' to the left */
 #default {
-	left: 0em;
+  left: 0em;
   float: left;
+}
+
+#tooltip {
+	display: none;
+	background-color: #8e2b25 ;
+	border-style: solid;
+	border-color: #8e2b25;
+	border-width: 2px;
+	position: relative;
+	padding: 0 0.45em;
+	float: left;
 }
 
 /* Set 'credits' to the right */
