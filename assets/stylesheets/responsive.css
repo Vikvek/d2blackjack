@@ -1,0 +1,39 @@
+/*
+===========================================
+Responsive CSS for Responsive Web Design
+===========================================
+*/
+
+
+@media screen and (max-width: 899px) {
+	.settings:hover .settingsDropdown {display: none;}
+	.help:hover .helpDropdown {display: none;}
+
+	.wrapper,
+	.playingField {
+		width: 100%;
+	}
+
+	.text {
+	}
+}
+
+@media screen and (max-width: 760px) {
+	.help {
+		display: none;
+}
+
+@media screen and (max-width: 450px) {
+	.login,
+	.settings {
+		display: none;
+	}
+	.text {
+		font-size: 200%
+	}
+
+	#resetbet,
+	#deal {
+		padding: 0 2em;
+	}
+}
