@@ -1,15 +1,13 @@
 # d2blackjack
 ---
 # To Do:
-# - 1.Responsive design 
+# - 1.Responsive design
     - Works fine fullscreen at 1920 x 1080 resolution, however for smaller screens it does not
-	- 'Bet' and 'Credits' uses javascript/jQuery to move around, it does not work as when screen size is small
-	-- check responsive.css
-# - 2.Tooltip for bet amounts:
-	- Show tooltips when hovering over bet chips telling the user how much are they betting
-# - 3.Check browser compatibility:
+	  - 'Bet' and 'Credits' uses javascript/jQuery to move around, it does not work as when screen size is small
+	  - check responsive.css
+# - 2.Check browser compatibility:
     - Chrome works fine (for now)
-	- Mozilla works fine (for now)
+	  - Mozilla works fine (for now)
 ---
 
 
