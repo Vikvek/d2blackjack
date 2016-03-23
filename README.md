@@ -5,7 +5,8 @@
     - Works fine fullscreen at 1920 x 1080 resolution, however for smaller screens it does not
 	  - 'Bet' and 'Credits' uses javascript/jQuery to move around, it does not work as when screen size is small
 	  - check responsive.css
-# - 2.Check browser compatibility:
+# - 2.Refreshing the page while playing can be exploited, fix that
+# - 3.Check browser compatibility:
     - Chrome works fine (for now)
 	  - Mozilla works fine (for now)
 ---

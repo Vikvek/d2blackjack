@@ -34,64 +34,63 @@
 
         <div class="login">
         <?php
-            if(!isset($_SESSION['steamid'])) {
+        if(!isset($_SESSION['steamid'])) {
 
-            echo "<div id=\"loginbutton\">";
-                steamlogin(); //login button
-            echo "</div>";
+        echo "<div id=\"loginbutton\">";
+            steamlogin(); //login button
+        echo "</div>";
 
-            }  else {
+        }  else {
 
-            include ('includes/userInfo.php'); //To access the $steamprofile array
+        include ('includes/userInfo.php'); //To access the $steamprofile array
 
-            $steamprofile['welcome'] = $_SESSION['welcome'];
-            echo "<div id=\"avatar\">";
-                echo '<img src="'.$steamprofile['avatarmedium'].'"/>'; // Display their avatar!
-            echo "</div>";
+        $steamprofile['welcome'] = $_SESSION['welcome'];
+        echo "<div id=\"avatar\">";
+            echo '<img src="'.$steamprofile['avatarmedium'].'"/>'; // Display their avatar!
+        echo "</div>";
 
-            echo "<div id=\"welcome\">";
-                echo "Welcome " . $steamprofile['welcome'] . "<br>" . "<div id=\"welcomeName\">" . $steamprofile['personaname'] . "</div>";
-                steamlogout();
-            echo "</div>";
+        echo "<div id=\"welcome\">";
+            echo "Welcome " . $steamprofile['welcome'] . "<br>" . "<div id=\"welcomeName\">" . $steamprofile['personaname'] . "</div>";
+            steamlogout();
+        echo "</div>";
 
-            //MySQL --|PHP|--> players.json --AJAX--> Blackjack --AJAX--> update_credits.php --PHP--> players.json & MySQL
-            //If user is connected send info about him in players.json to be later used in our game
-            include_once ("includes/db.php");
+        //MySQL --|PHP|--> players.json --AJAX--> Blackjack --AJAX--> update_credits.php --PHP--> players.json & MySQL
+        //If user is connected send info about him in players.json to be later used in our game
+        include_once ("includes/db.php");
 
-            $steam_id = $_SESSION['steamid'];
+        $steam_id = $_SESSION['steamid'];
 
-            $sql_fetch_info = "SELECT * FROM users_steam WHERE steamid = $steam_id";
+        $sql_fetch_info = "SELECT * FROM users_steam WHERE steamid = $steam_id";
 
-			$response = array();
-			$players = array();
-			$result = mysqli_query($db, $sql_fetch_info);
-			while($row=mysqli_fetch_array($result)) {
-				$name=$row['name'];
-				$steamid=$row['steamid'];
-				$credits=$row['credits'];
+			  $response = array();
+			  $players = array();
+			  $result = mysqli_query($db, $sql_fetch_info);
+			    while($row=mysqli_fetch_array($result)) {
+				    $name=$row['name'];
+				    $steamid=$row['steamid'];
+				    $credits=$row['credits'];
 
-				$players = array('name'=> $name, 'steamid'=> $steamid,'credits'=> $credits);
+				    $players = array('name'=> $name, 'steamid'=> $steamid,'credits'=> $credits);
+			    }
 
-			}
+			    $data_results = file_get_contents('players.json');
+          $tempArray = json_decode($data_results, true);
 
-			$data_results = file_get_contents('players.json');
-            $tempArray = json_decode($data_results, true);
+           // Gives error if .json file is empty but fixing that breaks other things for now
+           if (!in_array($players, $tempArray)) {
+               //Append to json file after checking if it exists
+               $tempArray[] = $players;
+               $jsonData = json_encode($tempArray, JSON_PRETTY_PRINT);
 
-            // Gives error if .json file is empty but fixing that breaks other things for now
-            if (!in_array($players, $tempArray) || !$tempArray = $players) {
-            		//Append to json file after checking if it exists
-            		$tempArray[] = $players;
-            		$jsonData = json_encode($tempArray, JSON_PRETTY_PRINT);
+               //Write to file
+               file_put_contents('players.json', $jsonData);
+           }  else if (empty($tempArray)) {
+                $jsonData = json_encode($players, JSON_PRETTY_PRINT);
 
-            		//Write to file
-            		file_put_contents('players.json', $jsonData);
-            } else if (empty($tempArray)) {
-                    $jsonData = json_encode($players, JSON_PRETTY_PRINT);
-                    file_put_contents('players.json', $jsonData);
-            }
-        }
-
-
+                //Write to file
+                file_put_contents('players.json', $jsonData);
+              }
+           }
         ?>
         </div> <!-- End of .login Class -->
 

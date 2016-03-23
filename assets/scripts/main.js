@@ -29,6 +29,7 @@ function showBetAmount() {
     // Changes the position of 'credits' and 'default bet' if user opens bet menu. Also displays tooltip
     if ( $.browser.mozilla ) {
       $("#default").css({"bottom": "none", "top": "-0.3em"});
+      $("#tooltip").css({"display": "inherit","top": "-0.3em"});
       $("#credits").css({"bottom": "none", "top": "-0.3em"});
     } else {
       $("#default").css({"bottom": "0em"});
@@ -56,6 +57,7 @@ window.onclick = function(event) {
   if (!document.getElementById("betDropUp").classList.contains("show")) {
     if ( $.browser.mozilla ) {
       $("#default").css({"bottom": "none", "top": "1.6em"});
+      $("#tooltip").css({"display": "none"});
       $("#credits").css({"bottom": "none", "top": "1.6em"});
     } else {
       $("#default").css({"bottom": "-1.9em"});
@@ -410,6 +412,11 @@ function initGame() {
   //Tooltip for Orange Chip 100.00
   $("#increaseOrange").hover(function(){
     tooltipTextNode.nodeValue = "+$100.00"
+  }, function(){
+    tooltipTextNode.nodeValue = "+$0.00"
+  });
+  $("#resetbet").hover(function(){
+    tooltipTextNode.nodeValue = "-" + formatDollar(defaultBet);
   }, function(){
     tooltipTextNode.nodeValue = "+$0.00"
   });
@@ -1161,6 +1168,9 @@ function changeBet(n) {
 function resetBet() {
   defaultBet -= defaultBet;
   defaultTextNode.nodeValue = "Bet: " + formatDollar(defaultBet);
+
+  //Fixes bug
+  tooltipTextNode.nodeValue = "+$0.00"
 
   //Disable reset button after pressing it :D
   document.forms["controls"].elements["resetbet"].disabled = true;
